@@ -1,0 +1,8 @@
+{
+  "name": "InvokeLambda",
+  "version": "1.0.0",
+  "description": "Layer com código para execução de outras lambdas",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {}
+}

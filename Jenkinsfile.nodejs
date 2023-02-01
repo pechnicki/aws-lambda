@@ -1,0 +1,56 @@
+directory = env.JOB_BASE_NAME
+version = ''
+artifactId = "${directory}"
+extension = 'zip'
+groupId = env.JOB_NAME.replace("/${directory}", '').replace('/build', '')
+path_package = env.JOB_NAME.split('lambda/').last()
+path_compress = path_package
+content_compress = '*'
+s3bucket = 'pechnicki-lambda'
+s3prefix = 'functions'
+layers = 'layers'
+if (path_package.contains(layers)) {
+  path_package = "${path_package}/nodejs"
+  content_compress = 'nodejs'
+  s3prefix = layers
+}
+
+pipeline {
+  agent any
+
+  options {
+    timeout(time: 1, unit: 'HOURS')
+    disableConcurrentBuilds()
+    buildDiscarder(logRotator(numToKeepStr: '5'))
+    timestamps()
+  }
+  stages {
+    stage('BUILD') {
+      steps {
+        script {
+          dir(path_package) {
+            sh 'npm i'
+          }
+        }
+      }
+    }
+    stage('COMPRESS') {
+      steps {
+        script {
+          dir(path_compress) {
+            sh "zip -q -r ${artifactId}.${extension} ./${content_compress} -x *@tmp/*"
+          }
+        }
+      }
+    }
+    stage('UPLOAD TO S3') {
+      steps {
+        script {
+          dir(path_compress) {
+            sh "aws s3 cp ${artifactId}.${extension} s3://${s3bucket}/${s3prefix}"
+          }
+        }
+      }
+    }
+  }
+}

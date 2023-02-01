@@ -1,0 +1,10 @@
+{
+  "name": "NodeMSSQL",
+  "version": "1.0.0",
+  "description": "Layer de acesso ao node-mssql",
+  "main": "index.js",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "mssql": "^9.0.1"
+  }
+}
