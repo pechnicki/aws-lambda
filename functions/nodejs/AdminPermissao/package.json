@@ -1,0 +1,13 @@
+{
+    "name": "AdminPermissao",
+    "version": "1.0.0",
+    "description": "Função lambda para requisição de informações sobre Permissões no banco de dados ",
+    "main": "index.js",
+    "license": "Apache-2.0",
+    "devDependencies": {
+        "@types/aws-lambda": "^8.10.92"
+    },
+    "dependencies": {
+        "pg-format": "^1.0.4"
+    }
+}

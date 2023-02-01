@@ -1,0 +1,10 @@
+{
+    "name": "TestePerformanceAdminPlanoTeste",
+    "version": "1.0.0",
+    "description": "Lambda para manipulação do plano de testes",
+    "main": "index.js",
+    "license": "Apache-2.0",
+    "dependencies": {
+        "pg-format": "^1.0.4"
+    }
+}

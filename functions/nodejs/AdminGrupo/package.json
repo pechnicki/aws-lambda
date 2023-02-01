@@ -1,0 +1,10 @@
+{
+  "name": "AdminGrupo",
+  "version": "1.0.0",
+  "description": "Função lambda para requisição de informações sobre Grupos no banco de dados ",
+  "main": "index.js",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.92"
+  }
+}

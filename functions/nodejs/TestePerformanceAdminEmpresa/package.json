@@ -1,0 +1,10 @@
+{
+    "name": "TestePerformanceAdminEmpresa",
+    "version": "1.0.0",
+    "description": "Lambda para manipulação de empresa",
+    "main": "index.js",
+    "license": "Apache-2.0",
+    "dependencies": {
+        "pg-format": "^1.0.4"
+    }
+}

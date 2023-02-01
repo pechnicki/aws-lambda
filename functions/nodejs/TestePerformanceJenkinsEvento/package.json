@@ -1,0 +1,10 @@
+{
+    "name": "TestePerformanceJenkinsEvento",
+    "version": "1.0.0",
+    "description": "Lambda para registro de eventos baseados no resultado da execução do job no jenkins",
+    "main": "index.js",
+    "license": "Apache-2.0",
+    "dependencies": {
+        "pg-format": "^1.0.4"
+    }
+}

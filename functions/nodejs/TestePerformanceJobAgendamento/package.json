@@ -1,0 +1,12 @@
+{
+  "name": "TestePerformanceJobAgendamento",
+  "version": "1.0.0",
+  "description": "Lambda para criação de job no Jenkins",
+  "main": "index.js",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "https": "^1.0.0",
+    "qs": "^6.11.0"
+  }
+}

@@ -1,0 +1,302 @@
+<flow-definition plugin="workflow-job@2.42">
+	<actions>
+		<org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@1.9.2" />
+		<org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@1.9.2">
+			<jobProperties />
+			<triggers />
+			<parameters>
+				<string>
+					BRANCH
+				</string>
+				<string>
+					S3_BUCKET
+				</string>
+				<string>
+					API_URL
+				</string>
+				<string>
+					DURACAO
+				</string>
+				<string>
+					THREADS
+				</string>
+				<string>
+					EMPRESA
+				</string>
+				<string>
+					RAMPA
+				</string>
+				<string>
+					SQUAD
+				</string>
+				<string>
+					JANELA_EXECUCAO
+				</string>
+				<string>
+					ATRASO_INICIALIZACAO
+				</string>
+				<string>
+					SCRIPT
+				</string>
+				<string>
+					API_ID
+				</string>
+				<string>
+					DEPARTAMENTO
+				</string>
+				<string>
+					REPOSITORIO
+				</string>
+			</parameters>
+			<options />
+		</org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
+	</actions>
+	<description />
+	<keepDependencies>
+		false
+	</keepDependencies>
+	<properties>
+		<hudson.plugins.jira.JiraProjectProperty plugin="jira@3.6" />
+		<com.dabsquared.gitlabjenkins.connection.GitLabConnectionProperty plugin="gitlab-plugin@1.5.22">
+			<gitLabConnection>
+				gitprd
+			</gitLabConnection>
+			<jobCredentialId />
+			<useAlternativeCredential>
+				false
+			</useAlternativeCredential>
+		</com.dabsquared.gitlabjenkins.connection.GitLabConnectionProperty>
+		<org.jenkinsci.plugins.gitlablogo.GitlabLogoProperty plugin="gitlab-logo@1.0.5">
+			<repositoryName />
+		</org.jenkinsci.plugins.gitlablogo.GitlabLogoProperty>
+		<hudson.plugins.throttleconcurrents.ThrottleJobProperty plugin="throttle-concurrents@2.6">
+			<maxConcurrentPerNode>
+				0
+			</maxConcurrentPerNode>
+			<maxConcurrentTotal>
+				0
+			</maxConcurrentTotal>
+			<categories class="java.util.concurrent.CopyOnWriteArrayList" />
+			<throttleEnabled>
+				false
+			</throttleEnabled>
+			<throttleOption>
+				project
+			</throttleOption>
+			<limitOneJobWithMatchingParams>
+				false
+			</limitOneJobWithMatchingParams>
+			<paramsToUseForLimit />
+			<configVersion>
+				1
+			</configVersion>
+		</hudson.plugins.throttleconcurrents.ThrottleJobProperty>
+		<org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+			<triggers>
+				<org.jenkinsci.plugins.parameterizedscheduler.ParameterizedTimerTrigger plugin="parameterized-scheduler@1.0">
+					<spec />
+					<parameterizedSpecification>
+						#CRON_EXPRESSION %REPOSITORIO=#REPOSITORIO;BRANCH=#BRANCH;SCRIPT=#SCRIPT;THREADS=#THREADS;RAMPA=#RAMPA;DURACAO=#DURACAO;ATRASO_INICIALIZACAO=#ATRASO_INICIALIZACAO;JANELA_EXECUCAO=#JANELA_EXECUCAO;SQUAD=#SQUAD;DEPARTAMENTO=#DEPARTAMENTO;EMPRESA=#EMPRESA;API_URL=#API_URL;API_ID=#API_ID;S3_BUCKET=#S3_BUCKET
+					</parameterizedSpecification>
+				</org.jenkinsci.plugins.parameterizedscheduler.ParameterizedTimerTrigger>
+			</triggers>
+		</org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+		<hudson.model.ParametersDefinitionProperty>
+			<parameterDefinitions>
+				<hudson.model.StringParameterDefinition>
+					<name>
+						REPOSITORIO
+					</name>
+					<description>
+						Repositorio do Robo
+					</description>
+					<trim>
+						false
+					</trim>
+				</hudson.model.StringParameterDefinition>
+				<hudson.model.StringParameterDefinition>
+					<name>
+						BRANCH
+					</name>
+					<description>
+						Branch do repositório
+					</description>
+					<trim>
+						false
+					</trim>
+				</hudson.model.StringParameterDefinition>
+				<hudson.model.StringParameterDefinition>
+					<name>
+						SCRIPT
+					</name>
+					<description>
+						Script
+					</description>
+					<trim>
+						false
+					</trim>
+				</hudson.model.StringParameterDefinition>
+				<hudson.model.StringParameterDefinition>
+					<name>
+						THREADS
+					</name>
+					<description>
+						Quantidade de threads
+					</description>
+					<trim>
+						false
+					</trim>
+				</hudson.model.StringParameterDefinition>
+				<hudson.model.StringParameterDefinition>
+					<name>
+						RAMPA
+					</name>
+					<description>
+						Rampa
+					</description>
+					<trim>
+						false
+					</trim>
+				</hudson.model.StringParameterDefinition>
+				<hudson.model.StringParameterDefinition>
+					<name>
+						DURACAO
+					</name>
+					<description>
+						Duração
+					</description>
+					<trim>
+						false
+					</trim>
+				</hudson.model.StringParameterDefinition>
+				<hudson.model.StringParameterDefinition>
+					<name>
+						ATRASO_INICIALIZACAO
+					</name>
+					<description>
+						Atraso na inicialização
+					</description>
+					<trim>
+						false
+					</trim>
+				</hudson.model.StringParameterDefinition>
+				<hudson.model.StringParameterDefinition>
+					<name>
+						JANELA_EXECUCAO
+					</name>
+					<description>
+						Tempo em segundos de cada janela de dados
+					</description>
+					<trim>
+						false
+					</trim>
+				</hudson.model.StringParameterDefinition>
+				<hudson.model.StringParameterDefinition>
+					<name>
+						SQUAD
+					</name>
+					<description>
+						Squad
+					</description>
+					<trim>
+						false
+					</trim>
+				</hudson.model.StringParameterDefinition>
+				<hudson.model.StringParameterDefinition>
+					<name>
+						DEPARTAMENTO
+					</name>
+					<description>
+						Departamento
+					</description>
+					<trim>
+						false
+					</trim>
+				</hudson.model.StringParameterDefinition>
+				<hudson.model.StringParameterDefinition>
+					<name>
+						EMPRESA
+					</name>
+					<description>
+						Empresa
+					</description>
+					<trim>
+						false
+					</trim>
+				</hudson.model.StringParameterDefinition>
+				<hudson.model.StringParameterDefinition>
+					<name>
+						API_URL
+					</name>
+					<description>
+						Url da API de resultados
+					</description>
+					<trim>
+						false
+					</trim>
+				</hudson.model.StringParameterDefinition>
+				<hudson.model.StringParameterDefinition>
+					<name>
+						API_ID
+					</name>
+					<description>
+						Id da API de resultados
+					</description>
+					<trim>
+						false
+					</trim>
+				</hudson.model.StringParameterDefinition>
+				<hudson.model.StringParameterDefinition>
+					<name>
+						S3_BUCKET
+					</name>
+					<description>
+						Bucket para upload do arquivo de resultado
+					</description>
+					<trim>
+						false
+					</trim>
+				</hudson.model.StringParameterDefinition>
+			</parameterDefinitions>
+		</hudson.model.ParametersDefinitionProperty>
+	</properties>
+	<definition class="org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition" plugin="workflow-cps@2.94">
+		<scm class="hudson.plugins.git.GitSCM" plugin="git@4.9.0">
+			<configVersion>
+				2
+			</configVersion>
+			<userRemoteConfigs>
+				<hudson.plugins.git.UserRemoteConfig>
+					<url>
+						https://github.com/pechnicki/aws-lambda.git
+					</url>
+					<credentialsId>
+						jenkins
+					</credentialsId>
+				</hudson.plugins.git.UserRemoteConfig>
+			</userRemoteConfigs>
+			<branches>
+				<hudson.plugins.git.BranchSpec>
+					<name>
+						*/master
+					</name>
+				</hudson.plugins.git.BranchSpec>
+			</branches>
+			<doGenerateSubmoduleConfigurations>
+				false
+			</doGenerateSubmoduleConfigurations>
+			<submoduleCfg class="empty-list" />
+			<extensions />
+		</scm>
+		<scriptPath>
+			Jenkinsfile
+		</scriptPath>
+		<lightweight>
+			true
+		</lightweight>
+	</definition>
+	<triggers />
+	<disabled>
+		false
+	</disabled>
+</flow-definition>

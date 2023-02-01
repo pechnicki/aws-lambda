@@ -1,0 +1,13 @@
+{
+    "name": "GoogleChatWebhook",
+    "version": "1.0.0",
+    "description": "Função lambda para envio de mensagens no Google Chat",
+    "main": "index.js",
+    "license": "Apache-2.0",
+    "devDependencies": {
+        "@types/aws-lambda": "^8.10.92"
+    },
+    "dependencies": {
+        "node-fetch": "^2.6.7"
+    }
+}
