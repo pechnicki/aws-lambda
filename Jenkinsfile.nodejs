@@ -1,8 +1,7 @@
 directory = env.JOB_BASE_NAME
 version = ''
-artifactId = "${directory}"
+artifactName = "${directory}"
 extension = 'zip'
-groupId = env.JOB_NAME.replace("/${directory}", '').replace('/build', '')
 path_package = env.JOB_NAME.split('lambda/').last()
 path_compress = path_package
 content_compress = '*'
@@ -42,7 +41,7 @@ pipeline {
       steps {
         script {
           dir(path_compress) {
-            sh "zip -q -r ${artifactId}.${extension} ./${content_compress} -x *@tmp/*"
+            sh "zip -q -r ${artifactName}-${version}.${extension} ./${content_compress} -x *@tmp/*"
           }
         }
       }
@@ -52,7 +51,7 @@ pipeline {
         script {
           withCredentials([usernamePassword(credentialsId: 'aws', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
             dir(path_compress) {
-              sh "aws s3 cp ${artifactId}-${version}.${extension} s3://${s3bucket}/${s3prefix}/"
+              sh "aws s3 cp ${artifactName}-${version}.${extension} s3://${s3bucket}/${s3prefix}/"
             }
           }
         }
