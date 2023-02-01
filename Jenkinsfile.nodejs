@@ -46,8 +46,10 @@ pipeline {
     stage('UPLOAD TO S3') {
       steps {
         script {
-          dir(path_compress) {
-            sh "aws s3 cp ${artifactId}.${extension} s3://${s3bucket}/${s3prefix}"
+          withCredentials([usernamePassword(credentialsId: 'aws', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+            dir(path_compress) {
+              sh "aws s3 cp ${artifactId}.${extension} s3://${s3bucket}/${s3prefix}"
+            }
           }
         }
       }
