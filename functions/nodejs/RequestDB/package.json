@@ -1,6 +1,6 @@
 {
   "name": "RequestDB",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "Função lambda que efetua requisições para o banco de dados ",
   "main": "index.js",
   "license": "Apache-2.0",
