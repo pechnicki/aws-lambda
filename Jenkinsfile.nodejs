@@ -13,6 +13,8 @@ if (path_package.contains(layers)) {
   content_compress = 'nodejs'
   s3prefix = layers
 }
+fileName = ''
+sha256sum = ''
 
 pipeline {
   agent any
@@ -32,6 +34,7 @@ pipeline {
               script: "cat package.json | grep version | xargs | cut -d' ' -f2 | sed 's|,||g'",
               returnStdout: true
             ).trim()
+            fileName = "${artifactName}-${version}.${extension}"
             sh 'npm i'
           }
         }
@@ -41,7 +44,11 @@ pipeline {
       steps {
         script {
           dir(path_compress) {
-            sh "zip -q -r ${artifactName}-${version}.${extension} ./${content_compress} -x *@tmp/*"
+            sh "zip -q -r ${fileName} ./${content_compress} -x *@tmp/*"
+            sha256sum = sh(
+              script: "sha256sum.exe 01_provider.tf | cut -d' ' -f1 | tr -d '\n' ",
+              returnStdout: true
+            ).trim()
           }
         }
       }
@@ -51,7 +58,8 @@ pipeline {
         script {
           withCredentials([usernamePassword(credentialsId: 'aws-s3', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
             dir(path_compress) {
-              sh "aws s3 cp ${artifactName}-${version}.${extension} s3://${s3bucket}/${s3prefix}/"
+              sh "aws s3api put-object --bucket ${s3bucket} --key ${s3prefix}/${fileName} --body ${fileName} --tagging 'etag=sha256sum'"
+            //sh "aws s3 cp ${artifactName}-${version}.${extension} s3://${s3bucket}/${s3prefix}/"
             }
           }
         }
