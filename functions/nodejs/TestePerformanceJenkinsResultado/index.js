@@ -21,7 +21,7 @@ exports.handler = async (event) => {
         // atualiza o estado do job
         lambda.invoke(
           {
-            database: "portal-performance",
+            
             query: "UPDATE teste_performance.job SET estado = $1 WHERE id = $2",
             parameters: [
               "Interpretando resultados",
@@ -98,7 +98,7 @@ exports.handler = async (event) => {
             body = error;
             lambda.invoke(
               {
-                database: "portal-performance",
+                
                 query: "UPDATE teste_performance.job SET estado = $1 WHERE id = $2",
                 parameters: [
                   "Erro na interpretação de resultados",

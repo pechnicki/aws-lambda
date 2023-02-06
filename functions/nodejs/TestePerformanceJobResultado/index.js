@@ -20,7 +20,7 @@ exports.handler = async (event, context) => {
       event.body = JSON.parse(event.body);
     }
     let payload = {
-      database: "portal-performance",
+      
     };
     switch (event.httpMethod.toUpperCase()) {
       case "POST":

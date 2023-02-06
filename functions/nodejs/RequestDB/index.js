@@ -3,15 +3,12 @@ const SecretsManager = require("/opt/nodejs/SecretsManager");
 const sm = new SecretsManager();
 
 exports.handler = async (event) => {
-  const secret = JSON.parse(
-    await sm.getSecret("pechnicki-kms", process.env.REGION)
-  );
   const postgresConfig = {
     host: process.env.POSTGRES_HOST,
     port: process.env.POSTGRES_PORT,
-    database: event.database,
-    user: secret.user,
-    password: secret.password,
+    database: event.database || "pechnicki",
+    user: process.env.POSTGRES_USER,
+    password: process.env.POSTGRES_PWD,
   };
   const postgres = new Client(postgresConfig);
 

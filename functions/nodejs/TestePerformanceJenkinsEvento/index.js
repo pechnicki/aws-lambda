@@ -77,7 +77,7 @@ exports.handler = async (event, context) => {
         throw new Error(`Unsupported method: "${event.httpMethod}"`);
     }
     let payload = {
-      database: "portal-performance",
+      
       query: query,
       parameters: parameters,
     };
@@ -103,7 +103,7 @@ exports.handler = async (event, context) => {
     // faz envio de email informando o requisitante
     // obtem endereço de e-mail e se ele quer receber notificacao
     payload = {
-      database: "portal-performance",
+      
       query: "SELECT email, notificacao FROM teste_performance.usuario where id = $1",
       parameters: [update.usuario],
     };

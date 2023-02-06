@@ -116,7 +116,7 @@ exports.handler = async (event, context) => {
         throw new Error(`Unsupported method: "${event.httpMethod}"`);
     }
     const payload = {
-      database: "portal-performance",
+      
       query: query,
       parameters: parameters,
     };
