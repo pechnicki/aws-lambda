@@ -46,7 +46,7 @@ pipeline {
           dir(path_compress) {
             sh "zip -q -r ${fileName} ./${content_compress} -x *@tmp/*"
             sha256sum = sh(
-              script: "sha256sum 01_provider.tf | cut -d' ' -f1 | tr -d '\n'",
+              script: "sha256sum ${fileName} | cut -d' ' -f1 | tr -d '\n'",
               returnStdout: true
             ).trim()
             print(sha256sum)
