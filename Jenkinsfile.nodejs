@@ -58,7 +58,7 @@ pipeline {
         script {
           withCredentials([usernamePassword(credentialsId: 'aws-s3', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
             dir(path_compress) {
-              sh "aws s3api put-object --bucket ${s3bucket} --key ${s3prefix}/${fileName} --body ${fileName} --tagging 'source_code_hash=${source_code_hash}'"
+              sh "aws s3api put-object --bucket ${s3bucket} --key ${s3prefix}/${fileName} --body ${fileName} --metadata source_code_hash=${source_code_hash}"
             //sh "aws s3 cp ${artifactName}-${version}.${extension} s3://${s3bucket}/${s3prefix}/"
             }
           }
