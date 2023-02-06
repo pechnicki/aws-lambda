@@ -46,9 +46,10 @@ pipeline {
           dir(path_compress) {
             sh "zip -q -r ${fileName} ./${content_compress} -x *@tmp/*"
             sha256sum = sh(
-              script: "sha256sum 01_provider.tf | cut -d' ' -f1 | tr -d '\n' ",
+              script: "sha256sum 01_provider.tf | cut -d' ' -f1 | tr -d '\n'",
               returnStdout: true
             ).trim()
+            print(sha256sum)
           }
         }
       }
@@ -58,7 +59,7 @@ pipeline {
         script {
           withCredentials([usernamePassword(credentialsId: 'aws-s3', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
             dir(path_compress) {
-              sh "aws s3api put-object --bucket ${s3bucket} --key ${s3prefix}/${fileName} --body ${fileName} --tagging 'etag=${sha256sum}'"
+              sh "aws s3api put-object --bucket ${s3bucket} --key ${s3prefix}/${fileName} --body ${fileName} --tagging sha256sum=${sha256sum}"
             //sh "aws s3 cp ${artifactName}-${version}.${extension} s3://${s3bucket}/${s3prefix}/"
             }
           }
